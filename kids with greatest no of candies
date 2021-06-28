@@ -32,4 +32,25 @@ Constraints:
 1 <= extraCandies <= 50
 
 
+-----------------------------------------------------------------------SOLUTION ONE----------------------------------------------------------------------------------------------
+class Solution {
+    public List<Boolean> kidsWithCandies(int[] c, int e) {
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<c.length;i++){
+            if(max<c[i]){
+                max=c[i];
+            }
+        }
+        ArrayList<Boolean> a=new ArrayList<Boolean>();
+        for(int i=0;i<c.length;i++){
+            if(c[i]+e>=max){
+               a.add(true); 
+            }else{
+                a.add(false);
+            }
+        }
+        return a;
+    }
+}
 
+--------------------------------------------------------------------------------SOLUTION TWO-------------------------------------------------------------------------------------
