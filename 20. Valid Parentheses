@@ -1,0 +1,116 @@
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+ 
+
+Example 1:
+
+Input: s = "()"
+Output: true
+Example 2:
+
+Input: s = "()[]{}"
+Output: true
+Example 3:
+
+Input: s = "(]"
+Output: false
+Example 4:
+
+Input: s = "([)]"
+Output: false
+Example 5:
+
+Input: s = "{[]}"
+Output: true
+ 
+
+Constraints:
+
+1 <= s.length <= 104
+s consists of parentheses only '()[]{}'
+
+----------------------------------------------------------------------------Solution----------------------------------------------------------------------------------------------
+
+Algo-
+
+Create a stack
+Traverse in the string
+if it is a starting bracker push it in stack
+check if the stack is empty or not, just to verify that the first character is not the closing brakcet
+if it is a close bracket, pop it and match it against the starting brackets, if it does not match then return false
+Finally after traversal if the stack is empty, return true
+
+class Solution {
+   public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<Character>();
+        
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            
+            if (ch == '(' || ch == '{' || ch == '[')
+                stack.push(ch);
+            
+            else if (stack.isEmpty())
+                return false;
+            
+            else if (ch == ')' && stack.pop() != '(')
+                return false;
+            
+            else if (ch == ']' && stack.pop() != '[')
+                return false;
+            
+            else if (ch == '}' && stack.pop() != '{')
+                return false;
+        }
+        
+        return stack.isEmpty();
+        
+    }
+}
+
+---------------------------------------------------------------------------------------Solution------------------------------------------------------------------------------------
+
+Algo:-1 puch all the opening brackets in the stack
+
+
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> ss = new Stack<>();
+        for (char c: s.toCharArray()) {
+            switch (c) {
+                case '(':
+                case '{':
+                case '[':
+                    ss.push(c); break;
+                case ')':
+                    if (!ss.empty() && ss.peek() == '(') ss.pop();
+                    else return false; break;
+                case '}':
+                    if (!ss.empty() && ss.peek() == '{') ss.pop();
+                    else return false; break;
+                case ']':
+                    if (!ss.empty() && ss.peek() == '[') ss.pop();
+                    else return false; break;
+            }
+        }
+        if (ss.empty()) return true;
+        else return false;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
